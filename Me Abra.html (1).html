@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador Relógio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lora', serif;
+      background: radial-gradient(circle, #800080, #4B0082);
+      color: white;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      text-align: center;
+      padding: 0 15px;
+    }
+
+    .clock {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      border: 10px solid white;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clock span {
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 1em;
+      text-align: center;
+      font-weight: bold;
+      padding: 0 10px;
+    }
+
+    .message-box {
+      position: absolute;
+      bottom: 10px;
+      width: 90%;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      font-size: 0.9em;
+    }
+
+    .message-box p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    Maria Fernanda & Thiago 💍💍
+  </h1>
+
+  <div class="clock">
+    <span id="timer">Carregando...</span>
+  </div>
+
+  <div class="message" id="daysLeft">X dias para o nosso dia</div>
+
+  <div class="message-box">
+    <p>Estou ansioso para ter você sempre ao meu lado, eu te amo muito meu amor!</p>
+    <p><em>1 Coríntios 13: 1 a 8</em></p>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function updateCountdown() {
+        const targetDate = new Date(Date.UTC(2025, 7, 27, 0, 0, 0)); // Data alvo 27 de Agosto 2025 em UTC
+
+        const now = new Date(); // Hora atual do dispositivo
+
+        console.log("Hora atual do dispositivo:", now);
+        console.log("Data alvo:", targetDate);
+
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          document.getElementById('timer').textContent = "Chegou nosso dia!";
+          document.getElementById('daysLeft').textContent = '';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('timer').textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById('daysLeft').textContent = `${days} dias para o nosso dia`;
+      }
+
+      setInterval(updateCountdown, 1000);
+
+      updateCountdown();
+    });
+  </script>
+</body>
+</html>
